@@ -1,0 +1,20 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import GameLayout from '../../layouts/GameLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('games');
+  return entries.map(game => ({
+    params: { game: game.slug }, props: { game: game },
+  }));
+}
+
+const { game } = Astro.props;
+const { Content } = await game.render();
+---
+<StarlightPage frontmatter={{ title: game.data.title, tableOfContents: false}}>
+  <GameLayout frontmatter={game.data}>
+    <Content />
+  </GameLayout>
+</StarlightPage>

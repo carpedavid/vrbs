@@ -6,9 +6,12 @@ const gameCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		creators: z.array(z.string()),
+		publisher: z.string(),
+		publishDate: z.string().optional(),
 		tags: z.array(z.string()),
-		image: z.string().optional(),
-		link: z.string()
+		image: z.object({ url: z.string(), alt: z.string() }),
+		link: z.string(),
+		description: z.string()
 	})
 });
 

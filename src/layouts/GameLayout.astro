@@ -1,0 +1,24 @@
+---
+const { frontmatter } = Astro.props;
+import CallToAction from '@astrojs/starlight/components/CallToAction.astro'
+---
+
+<p><a href={frontmatter.link}><img src={frontmatter.image.url} alt={frontmatter.image.alt} /></a></p>
+<p><strong>Created by</strong>
+    {frontmatter.creators.map((c: string, i: number) => {
+        if (i === (frontmatter.creators.length - 1)) {
+            return `${c}`
+        } else {
+            return `${c}, `
+        }
+    })}
+</p>
+<p><strong>Published by</strong> {frontmatter.publisher}</p>
+{frontmatter.publishedDate && <p><strong>Published by</strong> {frontmatter.publisher}</p>}
+<slot />
+<div class="sl-flex actions"><CallToAction variant="primary" link={frontmatter.link} icon={{type: "icon", name: "right-arrow"}}>Go to the game</CallToAction></div>
+<!-- <div class="sl-flex actions">
+    { frontmatter.tags.map((t: string) => {
+        return <CallToAction variant="secondary" link={`/tags/${t}`} icon={{type:"icon", name: "seti:css"}}>{t}</CallToAction>
+    })}
+</div> -->

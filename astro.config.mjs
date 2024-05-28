@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://vrbs.org',
 	integrations: [
 		starlight({
 			title: 'VRBS SRD',
@@ -24,13 +25,9 @@ export default defineConfig({
 						{ label: 'Building your game', link: '/srd/rules/'},
 					],
 				},
-				// {
-				// 	label: 'Game Directory',
-				// 	autogenerate: { directory: 'games' },
-				// 	collapsed: true
-				// },
+				{ label: 'Game directory', link: '/games/'},
 				{ label: 'Credits', link: '/credits/'},
-				{ label: 'Amalara Game Studio', link: 'https://amalara.com', icon: ''}
+				{ label: 'Amalara Game Studio', link: 'https://amalara.com'}
 			],
 		}),
 	],
