@@ -1,21 +1,24 @@
 ---
+import { Image } from 'astro:assets';
 import type { HTMLAttributes } from 'astro/types';
+import type { ImageMetadata } from 'astro';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
-	description?: string;
-    imgSrc?: string;
-    imgAlt?: string;
+	description: string;
+    imagePath: string;
+    altText: string;
 }
 
-const { title, description, imgSrc, imgAlt, ...attributes } = Astro.props;
+const { title, description, imagePath, altText, ...attributes } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata}>('/src/assets/games/*.{jped,jpg,png,gif}')
+if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
 ---
 
 <div class="sl-link-card">
 	<span class="sl-flex stack">
 		<a {...attributes}>
-			{!imgSrc && <span class="title" set:html={title} /> }
-            {imgSrc && <img src={imgSrc} alt={imgAlt} />}
+            <Image src={images[imagePath]()} alt={altText}/>
 		</a>
 		{description && <span class="description" set:html={description} />}
 	</span>

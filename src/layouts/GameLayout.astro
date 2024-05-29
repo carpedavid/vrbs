@@ -1,9 +1,14 @@
 ---
 const { frontmatter } = Astro.props;
 import CallToAction from '@astrojs/starlight/components/CallToAction.astro'
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const images = import.meta.glob<{ default: ImageMetadata}>('/src/assets/games/*.{jped,jpg,png,gif}')
+if (!images[frontmatter.image.url]) throw new Error(`"${frontmatter.image.url}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
 ---
 
-<p><a href={frontmatter.link}><img src={frontmatter.image.url} alt={frontmatter.image.alt} /></a></p>
+<p><a href={frontmatter.link}><Image src={images[frontmatter.image.url]()} alt={frontmatter.image.alt}/></a></p>
 <p><strong>Created by</strong>
     {frontmatter.creators.map((c: string, i: number) => {
         if (i === (frontmatter.creators.length - 1)) {

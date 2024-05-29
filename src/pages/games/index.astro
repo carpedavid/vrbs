@@ -10,7 +10,7 @@ const games = await getCollection('games');
     <CardGrid>
         {
             games.map(game => {
-               return <GameCard title={game.data.title} href={`/games/${game.slug}`} imgSrc={game.data.image.url} imgAlt={game.data.image.alt} description={game.data.description} />
+               return <GameCard title={game.data.title} href={`/games/${game.slug}`} imagePath={game.data.image.url} altText={game.data.image.alt} description={game.data.description} />
             })
         }
     </CardGrid>
