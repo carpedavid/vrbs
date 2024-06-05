@@ -1,17 +1,16 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 import { getCollection } from 'astro:content';
-import { CardGrid } from '@astrojs/starlight/components';
 import GameCard from '../../components/GameCard.astro'
 
 const games = await getCollection('games');
 ---
 <StarlightPage frontmatter={{ title: 'Game directory', tableOfContents: false}}>
-    <CardGrid>
+    <div class="game-grid">
         {
             games.map(game => {
                return <GameCard title={game.data.title} href={`/games/${game.slug}`} imagePath={game.data.image.url} altText={game.data.image.alt} description={game.data.description} />
             })
         }
-    </CardGrid>
+    </div>
 </StarlightPage>

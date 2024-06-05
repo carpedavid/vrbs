@@ -15,7 +15,7 @@ const images = import.meta.glob<{ default: ImageMetadata}>('/src/assets/games/*.
 if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`)
 ---
 
-<div class="sl-link-card">
+<div class="sl-link-card game-card">
 	<span class="sl-flex stack">
 		<a {...attributes}>
             <Image src={images[imagePath]()} alt={altText}/>
